@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "703201381532",
+    "project_id": "mantra-cc17",
+    "storage_bucket": "mantra-cc17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703201381532:android:d8814ec3be375f7146f159",
+        "android_client_info": {
+          "package_name": "com.example.mantradashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcQzNYZAmThK7QilRATNGHWJ4eyVzZ5B8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
