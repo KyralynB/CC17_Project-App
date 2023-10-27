@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/primary">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/invisible"
+            android:drawable="@drawable/arrow_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/inter"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            />
+
+</LinearLayout>

@@ -2,15 +2,16 @@ package com.example.mantradashboard;
 
 public class UserHelperClass {
 
-    String fname, lname, email, password, contact_num, address;
+    String fname, lname, email, role, password, contact_num, address;
 
     public UserHelperClass() {
     }
 
-    public UserHelperClass(String fname, String lname, String email, String password, String contact_num, String address) {
+    public UserHelperClass(String fname, String lname, String email, String role, String password, String contact_num, String address) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
+        this.role = role;
         this.password = password;
         this.contact_num = contact_num;
         this.address = address;
@@ -38,6 +39,14 @@ public class UserHelperClass {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getPassword() {

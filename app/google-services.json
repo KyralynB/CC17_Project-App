@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "703201381532",
-    "project_id": "mantra-cc17",
-    "storage_bucket": "mantra-cc17.appspot.com"
+    "project_number": "555207746902",
+    "firebase_url": "https://mantra-cc17-d39c4-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mantra-cc17-d39c4",
+    "storage_bucket": "mantra-cc17-d39c4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:703201381532:android:d8814ec3be375f7146f159",
+        "mobilesdk_app_id": "1:555207746902:android:73c829e0e4e2068c95a2f7",
         "android_client_info": {
           "package_name": "com.example.mantradashboard"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAcQzNYZAmThK7QilRATNGHWJ4eyVzZ5B8"
+          "current_key": "AIzaSyCEg2VcFaK1tFS-YEkKZBeBA1VuxaGifdU"
         }
       ],
       "services": {

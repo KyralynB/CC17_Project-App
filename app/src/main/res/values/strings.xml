@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Mantra Dashboard</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">E-mail</string>
+    <string name="role">Select Role</string>
+    <string name="password">Password</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="home_add">Home Address</string>
+
+
+    <string name="update">Update</string>
 </resources>
