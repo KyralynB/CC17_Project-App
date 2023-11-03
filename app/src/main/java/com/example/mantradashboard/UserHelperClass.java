@@ -17,6 +17,9 @@ public class UserHelperClass {
         this.address = address;
     }
 
+    public UserHelperClass(String transtype, String quantity, String price, String deldate, String expdate) {
+    }
+
     public String getFname() {
         return fname;
     }

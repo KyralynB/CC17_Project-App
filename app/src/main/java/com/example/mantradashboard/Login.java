@@ -98,9 +98,9 @@ public class Login extends AppCompatActivity {
                 if(snapshot.exists()){
                     String emailFromDB = snapshot.child(userEnteredEmail).child("email").getValue(String.class);
 
-                    if (emailFromDB.equals(userEnteredEmail)){
+                    /*if (emailFromDB.equals(userEnteredEmail)){
                         String
-                    }
+                    }*/
                 }
             }
 

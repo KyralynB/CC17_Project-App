@@ -1,4 +1,5 @@
 <resources>
+    <!--Add Users-->
     <string name="app_name">Mantra Dashboard</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -8,6 +9,37 @@
     <string name="contact_info">Contact Information</string>
     <string name="home_add">Home Address</string>
 
+    <!--Add Items-->
+    <string name="enter_item_name">Enter Item Name</string>
+    <string name="enter_qr_code">E.g. abcd1234</string>
+    <string name="low_lev_alert_eg">E.g. 100</string>
+    <string name="item_type">Item Type</string>
+    <string name="enter_unit">Enter Unit</string>
+    <string name="enter_description">Enter Description</string>
 
+    <!--Add Transactions-->
+    <string name="trans_type">Transaction Type</string>
+    <string name="type_of_unit">How many [unit type]</string>
+    <string name="price">Price</string>
+    <string name="date_format">mm/dd/yyyy</string>
+
+    <!--Text View-->
+        <!--Add Item-->
+        <string name="tv_item_name">Item Name</string>
+        <string name="tv_qr_code">QR Code ID</string>
+        <string name="tv_lev_alert">Low Level Alert</string>
+        <string name="tv_select_item_type">Select Item Type</string>
+        <string name="tv_unit">Unit</string>
+        <string name="tv_description">Description</string>
+        <string name="tv_upload_img">Upload Image</string>
+
+        <string name="quantity">Quantity</string>
+        <string name="del_date">Delivery Date</string>
+        <string name="exp_date">Expiration Date</string>
+
+
+    <!--Buttons-->
     <string name="update">Update</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">Submit</string>
 </resources>
