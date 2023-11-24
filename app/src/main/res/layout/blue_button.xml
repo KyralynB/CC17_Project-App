@@ -2,7 +2,7 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_button"
+    android:background="@drawable/rounded__background_blue"
     android:fontFamily="@font/inter"
     android:id="@+id/reg_signup"
     android:layout_marginTop="30dp"

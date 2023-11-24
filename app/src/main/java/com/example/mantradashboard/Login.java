@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, EditUser.class);
+                Intent intent = new Intent(Login.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         String noWhiteSpace = "(\\A\\w{4,20}\\z)";
 
         if (val.isEmpty()) {
-            email.setError("Input your email.");
+            email.setError("Input your email."); 
             return false;
         } else {
             email.setError(null);

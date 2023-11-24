@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mantradashboard"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -27,6 +27,12 @@ android {
             )
         }
     }
+
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

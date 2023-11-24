@@ -1,8 +1,12 @@
 package com.example.mantradashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.media.RouteListingPreference;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -11,39 +15,40 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mantradashboard.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN = 5000;
-
-    //variables
-    Animation topAnim, bottomAnim;
-    ImageView image;
-    TextView text;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //Animation
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        replaceFragment(new FragmentHome());
+        binding.bottomNavigationView.setBackground(null);
 
-        //Hooks
-        image = findViewById(R.id.logo_blue);
-        text = findViewById(R.id.logo_text);
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
-        image.setAnimation(topAnim);
-        text.setAnimation(bottomAnim);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-                finish();
+            if (item.getItemId() == R.id.menu_home) {
+                replaceFragment(new FragmentHome());
+            } else if (item.getItemId() == R.id.menu_items) {
+                replaceFragment(new FragmentItemInventory());
+            } else if (item.getItemId() == R.id.menu_requests) {
+                replaceFragment(new FragmentInventoryRequest());
+            } else if (item.getItemId() == R.id.menu_users) {
+                replaceFragment(new FragmentUserManagement());
             }
-        }, SPLASH_SCREEN);
+            return true;
+        });
+    }
+
+    private void replaceFragment (Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.home_frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 }

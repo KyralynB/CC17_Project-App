@@ -24,22 +24,26 @@
     <string name="date_format">mm/dd/yyyy</string>
 
     <!--Text View-->
-        <!--Add Item-->
-        <string name="tv_item_name">Item Name</string>
-        <string name="tv_qr_code">QR Code ID</string>
-        <string name="tv_lev_alert">Low Level Alert</string>
-        <string name="tv_select_item_type">Select Item Type</string>
-        <string name="tv_unit">Unit</string>
-        <string name="tv_description">Description</string>
-        <string name="tv_upload_img">Upload Image</string>
+    <!--Add Item-->
+    <string name="tv_item_name">Item Name</string>
+    <string name="tv_qr_code">QR Code ID</string>
+    <string name="tv_lev_alert">Low Level Alert</string>
+    <string name="tv_select_item_type">Select Item Type</string>
+    <string name="tv_unit">Unit</string>
+    <string name="tv_description">Description</string>
+    <string name="tv_upload_img">Upload Image</string>
 
-        <string name="quantity">Quantity</string>
-        <string name="del_date">Delivery Date</string>
-        <string name="exp_date">Expiration Date</string>
+    <string name="quantity">Quantity</string>
+    <string name="del_date">Delivery Date</string>
+    <string name="exp_date">Expiration Date</string>
 
 
     <!--Buttons-->
     <string name="update">Update</string>
     <string name="sign_up">Sign Up</string>
     <string name="submit">Submit</string>
+
+    <!--Dashboard-->
+    <string name="stock">Stock</string>
+
 </resources>

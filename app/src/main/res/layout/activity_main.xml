@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/home_frame_layout">
+    </FrameLayout>
 
-    <ImageView
-        android:id="@+id/logo_blue"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/dark_grey"
+            android:layout_marginBottom="10dp"
+            app:fabAlignmentMode="center"
+            app:fabCradleRoundedCornerRadius="20dp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:labelVisibilityMode="labeled"
+                android:background="@drawable/rounded__background_grey"
+                app:menu="@menu/bottom_menu"
+                app:itemTextColor="@color/white"
+                app:itemIconTint="@color/white"/>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428"
-        app:srcCompat="@drawable/logo_blue" />
+        app:layout_anchor="@id/bottomAppBar"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/qrcode"
+        app:maxImageSize="40dp"
+        />
 
-    <TextView
-        android:id="@+id/logo_text"
-        android:layout_width="180dp"
-        android:layout_height="43dp"
-        android:fontFamily="@font/montserrat_subrayada"
-        android:text="Mantra"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_blue"
-        app:layout_constraintVertical_bias="0.109" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
