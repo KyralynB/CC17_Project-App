@@ -31,7 +31,7 @@ public class AddTransaction extends AppCompatActivity {
 
     //Firebase
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    DatabaseReference    reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

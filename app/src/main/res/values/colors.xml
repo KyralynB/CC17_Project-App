@@ -4,10 +4,15 @@
     <color name="black">#425466</color>
     <color name="white">#FFFFFFFF</color>
     <color name="invisible">#00000000</color>
-    <color name="blue">#225ADF</color>
+    <color name="light_blue">#B5CBFF</color>
     <color name="dark_grey">#D9D9D9</color>
     <color name="light_grey">#F4F4F4</color>
     <color name="light_pink">#FFA4A4</color>
     <color name="grey">#4f4F4F</color>
+    <color name="red">#F44C4C</color>
+    <color name="green">#5FAB6B</color>
+    <color name="light_green">#D8F6DC</color>
+    <color name="light_yellow">#FFE7B4</color>
+    <color name="yellow">#FDB623</color>
 
 </resources>

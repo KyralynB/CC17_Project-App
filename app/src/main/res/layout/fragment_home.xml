@@ -2,7 +2,8 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_dashboard"
+    android:id="@+id/fragment_home"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentHome">
@@ -13,25 +14,16 @@
         android:layout_height="match_parent"
         android:background="@color/light_grey"
         android:orientation="vertical"
-        android:padding="30dp"
         tools:context=".MainActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/round_button"
-                app:srcCompat="@drawable/ic_person" />
-
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="225dp"
-                android:layout_height="36dp"
-                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Summary Inventory"
                 android:textColor="@color/black"
@@ -220,7 +212,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Number of Current Status"
@@ -341,6 +332,7 @@
                         android:weightSum="3">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_static_home"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
