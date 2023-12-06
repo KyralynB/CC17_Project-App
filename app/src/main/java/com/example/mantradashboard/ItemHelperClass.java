@@ -2,17 +2,18 @@ package com.example.mantradashboard;
 
 public class ItemHelperClass {
 
-    String itemName, qrCode, lowLev, itemType, unit, desc;
+    String itemName, qrCode, lowLev, itemType, unit, quantity, desc;
 
     public ItemHelperClass() {
     }
 
-    public ItemHelperClass(String itemName, String qrCode, String lowLev, String itemType, String unit, String desc) {
+    public ItemHelperClass(String itemName, String qrCode, String lowLev, String itemType, String unit, String quantity, String desc) {
         this.itemName = itemName;
         this.qrCode = qrCode;
         this.lowLev = lowLev;
         this.itemType = itemType;
         this.unit = unit;
+        this.quantity = quantity;
         this.desc = desc;
     }
 
@@ -56,6 +57,13 @@ public class ItemHelperClass {
         this.unit = unit;
     }
 
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
     public String getDesc() {
         return desc;
     }

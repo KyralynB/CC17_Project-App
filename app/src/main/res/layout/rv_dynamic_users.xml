@@ -15,6 +15,14 @@
             android:layout_margin="5dp"
             android:layout_gravity="center_vertical">
 
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:src="@mipmap/ic_launcher"
+                android:id="@+id/item_img"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -49,19 +57,19 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/item_status"
+<!--            <TextView
+                android:id="@+id/user_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
                 android:background="@drawable/rounded__background_light_blue"
                 android:backgroundTint="@color/light_green"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
+                android:layout_marginTop="3dp"
+                android:paddingHorizontal="20dp"
                 android:text="Admin"
                 android:textColor="@color/green"
-                android:textSize="16sp" />
-
+                android:textSize="16sp" />-->
         </LinearLayout>
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>

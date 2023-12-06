@@ -1,7 +1,9 @@
 package com.example.mantradashboard;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -18,13 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddItem extends AppCompatActivity {
 
-    String[] type = {"Vial", "Tablet", "Boxes"};
+    String[] type = {"Medicine", "Tools", "Equipment"};
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
 
+    AdapterItemInventory adapter;
+
     //Variables
-    TextInputLayout regItemName, reQr, regAlert, regItemType, regUnit, regDesc;
-    Button regSubmit, callAddTrans;
+    TextInputLayout regItemName, reQr, regAlert, regItemType, regUnit, regQuantity, regDesc;
+    Button regSubmit, btnCancel;
 
     //Firebase
     FirebaseDatabase rootNode;
@@ -41,12 +46,13 @@ public class AddItem extends AppCompatActivity {
         regAlert = findViewById(R.id.reg_alert);
         regItemType = findViewById(R.id.reg_item_type);
         regUnit = findViewById(R.id.reg_unit);
+        regQuantity = findViewById(R.id.reg_item_quantity);
         regDesc = findViewById(R.id.reg_desc);
 
 
         //Buttons
         regSubmit = findViewById(R.id.reg_add_item);
-        callAddTrans = findViewById(R.id.call_add_trans);
+        btnCancel = findViewById(R.id.btn_cancel);
 
         //Dropdown
         autoCompleteTextView = findViewById(R.id.auto_complete_txt);
@@ -68,18 +74,34 @@ public class AddItem extends AppCompatActivity {
             public void onClick(View v) {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("Items");
-
                 submitItem(v);
+                Toast.makeText(AddItem.this, "Item Added", Toast.LENGTH_SHORT).show();
             }
         });
 
         //Action; Go To Add Items
-        callAddTrans.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddItem.this, AddTransaction.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddItem.this);
+                builder.setTitle("Exit Without Saving");
+                builder.setMessage("Are you sure you want to cancel? Data inputs will be discarded.");
 
+                builder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(AddItem.this, "Item Discarded", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(AddItem.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
     }
@@ -92,11 +114,14 @@ public class AddItem extends AppCompatActivity {
         String Alert = regAlert.getEditText().getText().toString();
         String itemType = regItemType.getEditText().getText().toString();
         String Unit = regUnit.getEditText().getText().toString();
+        String Quantity = regQuantity.getEditText().getText().toString();
         String Desc = regDesc.getEditText().getText().toString();
 
         //Registration excecution
-        ItemHelperClass helperClass = new ItemHelperClass(itemName, Qr, Alert, itemType, Unit, Desc);
+        ItemHelperClass helperClass = new ItemHelperClass(itemName, Qr, Alert, itemType, Unit, Quantity, Desc);
         reference.child(itemName).setValue(helperClass);
+        finish();
+
 
     }
 }

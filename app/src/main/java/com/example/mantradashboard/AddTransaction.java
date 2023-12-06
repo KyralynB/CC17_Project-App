@@ -27,7 +27,7 @@ public class AddTransaction extends AppCompatActivity {
 
     //Variables
     TextInputLayout regTransType, regQuantity, regPrice, regDeliveryDate, regExpirationDate;
-    Button regSubmit, callAddItems;
+    Button regSubmit, btnCancel;
 
     //Firebase
     FirebaseDatabase rootNode;
@@ -45,10 +45,9 @@ public class AddTransaction extends AppCompatActivity {
         regDeliveryDate = findViewById(R.id.reg_trans_del_date);
         regExpirationDate = findViewById(R.id.reg_trans_exp_date);
 
-
         //Buttons
         regSubmit = findViewById(R.id.reg_add_trans);
-        callAddItems = findViewById(R.id.call_add_item);
+        btnCancel = findViewById(R.id.btn_cancel);
 
         //Dropdown
         autoCompleteTextView = findViewById(R.id.auto_complete_txt);
@@ -76,7 +75,7 @@ public class AddTransaction extends AppCompatActivity {
         });
 
         //Action; Go To Add Items
-        callAddItems.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddTransaction.this, AddItem.class);
@@ -94,9 +93,10 @@ public class AddTransaction extends AppCompatActivity {
         String price = regPrice.getEditText().getText().toString();
         String deldate = regDeliveryDate.getEditText().getText().toString();
         String expdate = regExpirationDate.getEditText().getText().toString();
+        String status = "Pending";
 
         //Registration excecution
-        TransactionHelperClass helperClass = new TransactionHelperClass(transtype, quantity, price, deldate, expdate);
+        TransactionHelperClass helperClass = new TransactionHelperClass(transtype, quantity, price, deldate, expdate, status);
         reference.child(quantity).setValue(helperClass);
 
     }

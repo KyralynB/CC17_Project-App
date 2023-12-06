@@ -6,10 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".EditUser"
+    tools:context=".AddUser"
     android:orientation="vertical">
-
-    <include layout="@layout/header"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,12 +24,24 @@
             <include layout="@layout/user" />
 
             <Button
-                android:id="@+id/reg_udpate_user"
+                android:id="@+id/reg_add_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/inter"
                 android:text="Submit"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_button">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/inter"
+                android:text="Cancel"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_button">
 
