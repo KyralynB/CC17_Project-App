@@ -1,7 +1,7 @@
 package com.example.mantradashboard;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,12 +23,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,17 +59,13 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
 
     //Button Add Transaction
     TextView ItemNameTV;
-    TextInputLayout TransType, TransQuantity, Price, DelDate, ExpDate;
-    TextInputEditText ETransQuantity, EPrice, EDelDate, EExpDate;
-    MaterialAutoCompleteTextView ETransType;
-
-
-    Button btnUpdate, btnDelete, btnSubmit;
-
-
-    //Variables
     TextInputLayout regTransType, regQuantity, regPrice, regDeliveryDate, regExpirationDate;
-    Button regSubmit, btnCancel;
+
+    private FirebaseDatabase rootNode;
+    private DatabaseReference reference;
+
+    Button btnUpdate, btnDelete, btnSubmit, btnCancel;
+
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, final int position, @NonNull ItemHelperClass model) {
         holder.name.setText(model.getItemName());
@@ -151,11 +145,26 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
                 btnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
-                                .setContentHolder(new ViewHolder(R.layout.activity_add_transaction))
-                                .setExpanded(true, 1500)
-                                .create();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
+                        builder.setTitle("Are you sure?");
+                        builder.setMessage("Discarded items cannot be undone");
 
+                        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseDatabase.getInstance().getReference().child("Items")
+                                        .child(getRef(position).getKey()).removeValue();
+                                Toast.makeText(holder.name.getContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
+                                dialogPlus.dismiss();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(holder.name.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builder.show();
                     }
                 });
             }
@@ -230,17 +239,17 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
 
                 //Complete Item Hooks
                 View view = dialogPlus.getHolderView();
-                ItemNameTV = view.findViewById(R.id.edit_item_name);
-                TransType = view.findViewById(R.id.reg_trans_type);
-                TransQuantity = view.findViewById(R.id.reg_trans_quantity);
-                Price = view.findViewById(R.id.reg_trans_price);
-                DelDate = view.findViewById(R.id.reg_trans_del_date);
-                ExpDate = view.findViewById(R.id.reg_trans_exp_date);
-
-                setToEditTextCompleteItems();
-                showAllItemData();
+                ItemNameTV = view.findViewById(R.id.item_name);
+                regTransType = view.findViewById(R.id.reg_trans_type);
+                regQuantity = view.findViewById(R.id.reg_trans_quantity);
+                regPrice = view.findViewById(R.id.reg_trans_price);
+                regDeliveryDate = view.findViewById(R.id.reg_trans_del_date);
+                regExpirationDate = view.findViewById(R.id.reg_trans_exp_date);
 
                 btnSubmit = view.findViewById(R.id.btn_add_trans);
+                btnCancel = view.findViewById(R.id.btn_cancel);
+
+                showAllItemData();
 
                 //Dropdown
                 autoCompleteTextView = view.findViewById(R.id.auto_complete_txt);
@@ -249,43 +258,48 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
 
                 dialogPlus.show();
 
+                // Firebase
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("Transactions");
+
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("itemName",ItemNameTV.getText().toString());
-                        map.put("ETransType",ETransType.getText().toString());
-                        map.put("ETransQuantity",ETransQuantity.getText().toString());
-                        map.put("EPrice",EPrice.getText().toString());
-                        map.put("EDelDate",EDelDate.getText().toString());
-                        map.put("EExpDate",EExpDate.getText().toString());
+                        submitTrans(dialogPlus);
 
-                        FirebaseDatabase.getInstance().getReference().child("Transactions")
-                                .child(getRef(position).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(holder.name.getContext(),"Data Updated Successfully", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(holder.name.getContext(), "Data Input Failed", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                });
                     }
                 });
             }
 
-            private void setToEditTextCompleteItems() {
-                ETransType = (MaterialAutoCompleteTextView)TransType.getEditText();
-                ETransQuantity = (TextInputEditText)TransQuantity.getEditText();
-                EPrice = (TextInputEditText)Price.getEditText();
-                EDelDate = (TextInputEditText)DelDate.getEditText();
-                EExpDate = (TextInputEditText)ExpDate.getEditText();
+            void submitTrans(DialogPlus dialogPlus) {
+                // Get all the values
+                String itemName = ItemNameTV.getText().toString();
+                String transtype = regTransType.getEditText().getText().toString();
+                String quantity = regQuantity.getEditText().getText().toString();
+                String price = regPrice.getEditText().getText().toString();
+                String deldate = regDeliveryDate.getEditText().getText().toString();
+                String expdate = regExpirationDate.getEditText().getText().toString();
+                String status = "Pending";
+
+                // Registration execution
+                TransactionHelperClass helperClass = new TransactionHelperClass(itemName, transtype, quantity, price, deldate, expdate, status);
+                reference.child(itemName).setValue(helperClass).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(holder.name.getContext(),"Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                                dialogPlus.dismiss();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(holder.name.getContext(), "Data Input Failed", Toast.LENGTH_SHORT).show();
+                                dialogPlus.dismiss();
+                            }
+                        });
+
+                // Display a message
+                Toast.makeText(holder.name.getContext(), "Transaction added successfully", Toast.LENGTH_SHORT).show();
             }
 
             private void typeDropDown(String dropdownType) {

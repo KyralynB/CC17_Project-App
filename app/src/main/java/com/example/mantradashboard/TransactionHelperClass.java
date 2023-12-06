@@ -2,12 +2,13 @@ package com.example.mantradashboard;
 
 public class TransactionHelperClass {
 
-    String transtype, quantity, price, deldate, expdate, status;
+    String itemname, transtype, quantity, price, deldate, expdate, status;
 
     public TransactionHelperClass() {;
     }
 
-    public TransactionHelperClass(String transtype, String quantity, String price, String deldate, String expdate, String status) {
+    public TransactionHelperClass(String itemname, String transtype, String quantity, String price, String deldate, String expdate, String status) {
+        this.itemname = itemname;
         this.transtype = transtype;
         this.quantity = quantity;
         this.price = price;
@@ -16,6 +17,13 @@ public class TransactionHelperClass {
         this.status = status;
     }
 
+    public String getItemName() {
+        return itemname;
+    }
+
+    public void setItemName(String itemname) {
+        this.itemname = itemname;
+    }
     public String getTranstype() {
         return transtype;
     }

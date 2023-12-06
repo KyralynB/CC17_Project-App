@@ -1,93 +1,73 @@
 package com.example.mantradashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AddTransaction extends AppCompatActivity {
+public class AddTransaction {
 
-    String[] type = {"In", "Out"};
-    AutoCompleteTextView autoCompleteTextView;
-    ArrayAdapter<String> adapterItems;
+    private String[] type = {"In", "Out"};
+    private ArrayAdapter<String> adapterItems;
 
-    //Variables
-    TextInputLayout regTransType, regQuantity, regPrice, regDeliveryDate, regExpirationDate;
-    Button regSubmit, btnCancel;
+    private TextInputLayout regTransType, regQuantity, regPrice, regDeliveryDate, regExpirationDate;
+    private TextView itemname;
+    private Button regSubmit, btnCancel;
 
-    //Firebase
-    FirebaseDatabase rootNode;
-    DatabaseReference    reference;
+    private FirebaseDatabase rootNode;
+    private DatabaseReference reference;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transaction);
+    private Context context;
 
-        //Hooks
-        regTransType = findViewById(R.id.reg_trans_type);
-        regQuantity = findViewById(R.id.reg_trans_quantity);
-        regPrice = findViewById(R.id.reg_trans_price);
-        regDeliveryDate = findViewById(R.id.reg_trans_del_date);
-        regExpirationDate = findViewById(R.id.reg_trans_exp_date);
+    public AddTransaction(Context context, View rootView) {
+        this.context = context;
 
-        //Buttons
-        regSubmit = findViewById(R.id.btn_add_trans);
-        btnCancel = findViewById(R.id.btn_cancel);
+        // Initialize views
+        itemname = rootView.findViewById(R.id.item_name);
+        regTransType = rootView.findViewById(R.id.reg_trans_type);
+        regQuantity = rootView.findViewById(R.id.reg_trans_quantity);
+        regPrice = rootView.findViewById(R.id.reg_trans_price);
+        regDeliveryDate = rootView.findViewById(R.id.reg_trans_del_date);
+        regExpirationDate = rootView.findViewById(R.id.reg_trans_exp_date);
 
-        //Dropdown
-        autoCompleteTextView = findViewById(R.id.auto_complete_txt);
+        regSubmit = rootView.findViewById(R.id.btn_add_trans);
+        btnCancel = rootView.findViewById(R.id.btn_cancel);
 
-        adapterItems = new ArrayAdapter<String>(this, R.layout.list_role, type);
-        autoCompleteTextView.setAdapter(adapterItems);
 
-        //Action; dropdown items for roles
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String item = adapterView.getItemAtPosition(position).toString();
-            }
-        });
+        // Firebase
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Transactions");
 
-        //Action; Add Transaction
+        // Action; Add Transaction
         regSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Transactions");
-
-                submitTrans(v);
+                submitTrans();
             }
         });
 
-        //Action; Go To Add Items
+        // Action; Go To Add Items
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddTransaction.this, AddItem.class);
-                startActivity(intent);
-
+                Intent intent = new Intent(context, AddItem.class);
+                context.startActivity(intent);
             }
         });
     }
 
-    public void submitTrans(View v) {
-
-        //Get all the values
+    void submitTrans() {
+        // Get all the values
+        String itemname = regTransType.getEditText().getText().toString();
         String transtype = regTransType.getEditText().getText().toString();
         String quantity = regQuantity.getEditText().getText().toString();
         String price = regPrice.getEditText().getText().toString();
@@ -95,9 +75,11 @@ public class AddTransaction extends AppCompatActivity {
         String expdate = regExpirationDate.getEditText().getText().toString();
         String status = "Pending";
 
-        //Registration excecution
-        TransactionHelperClass helperClass = new TransactionHelperClass(transtype, quantity, price, deldate, expdate, status);
+        // Registration execution
+        TransactionHelperClass helperClass = new TransactionHelperClass(itemname, transtype, quantity, price, deldate, expdate, status);
         reference.child(quantity).setValue(helperClass);
 
+        // Display a message
+        Toast.makeText(context, "Transaction added successfully", Toast.LENGTH_SHORT).show();
     }
 }
