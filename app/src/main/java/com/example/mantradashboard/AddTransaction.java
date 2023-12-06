@@ -46,7 +46,7 @@ public class AddTransaction extends AppCompatActivity {
         regExpirationDate = findViewById(R.id.reg_trans_exp_date);
 
         //Buttons
-        regSubmit = findViewById(R.id.reg_add_trans);
+        regSubmit = findViewById(R.id.btn_add_trans);
         btnCancel = findViewById(R.id.btn_cancel);
 
         //Dropdown

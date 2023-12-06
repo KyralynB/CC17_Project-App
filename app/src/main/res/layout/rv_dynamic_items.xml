@@ -102,14 +102,14 @@
                     android:background="@drawable/rounded_button"/>
 
                 <Button
-                android:id="@+id/btn_del"
+                android:id="@+id/btn_add_trans"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/inter"
-                android:text="Delete"
-                android:textColor="@color/red"
+                android:text="Add Transaction"
+                android:textColor="@color/yellow"
                 android:background="@color/invisible" />
 
             </LinearLayout>

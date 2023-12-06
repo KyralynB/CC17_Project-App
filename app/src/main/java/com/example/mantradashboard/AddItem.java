@@ -119,7 +119,7 @@ public class AddItem extends AppCompatActivity {
 
         //Registration excecution
         ItemHelperClass helperClass = new ItemHelperClass(itemName, Qr, Alert, itemType, Unit, Quantity, Desc);
-        reference.child(itemName).setValue(helperClass);
+        reference.child(Qr).setValue(helperClass);
         finish();
 
 
