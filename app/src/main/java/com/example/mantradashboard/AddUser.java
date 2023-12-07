@@ -74,8 +74,9 @@ public class AddUser extends AppCompatActivity {
         callLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddUser.this, Login.class);
-                startActivity(intent);
+/*                Intent intent = new Intent(AddUser.this, Login.class);
+                startActivity(intent);*/
+                finish();
             }
         });
     }

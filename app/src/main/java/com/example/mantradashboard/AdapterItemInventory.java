@@ -116,7 +116,6 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
                     public void onClick(View v) {
                         Map<String,Object> map = new HashMap<>();
                         map.put("itemName",EItemName.getText().toString());
-                        map.put("qrCode",EQr.getText().toString());
                         map.put("lowlevel",EAlert.getText().toString());
                         map.put("itemType",EItemType.getText().toString());
                         map.put("unit",EUnit.getText().toString());
@@ -206,16 +205,6 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
                     }
                 });
 
-/*                adapterItems = new ArrayAdapter<String>(holder.type.getContext(),R.layout.list_role,typeOfItem);
-                autoCompleteTextView.setAdapter(adapterItems);
-
-                //Action; dropdown items for roles
-                autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                        String item = adapterView.getItemAtPosition(position).toString();
-                    }
-                });*/
             }
 
             private void showAllItemData() {
@@ -328,17 +317,6 @@ public class AdapterItemInventory extends FirebaseRecyclerAdapter<ItemHelperClas
                         // Handle item selection if needed
                     }
                 });
-
-/*                adapterItems = new ArrayAdapter<String>(holder.type.getContext(),R.layout.list_role,typeOfItem);
-                autoCompleteTextView.setAdapter(adapterItems);
-
-                //Action; dropdown items for roles
-                autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                        String item = adapterView.getItemAtPosition(position).toString();
-                    }
-                });*/
             }
 
             private void showAllItemData() {

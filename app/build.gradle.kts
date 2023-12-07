@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mantradashboard"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,11 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.firebaseui:firebase-ui-database:8.0.2")
     implementation ("com.orhanobut:dialogplus:1.11@aar")
+
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation ("com.google.zxing:core:3.4.1")
+    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.2")
+    implementation ("androidx.multidex:multidex:2.0.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
